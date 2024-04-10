@@ -54,7 +54,7 @@ with colA:
         count = 0
         # print(df)
         try:
-            lst_y_opened.append(df["Target"].tolist()[0])
+            lst_y_opened.append(df["Limit"].tolist()[0])
             lst_y_closed.append(df["Breakdown Time"].tolist()[0])
         except Exception as e:
             print(e)
@@ -62,17 +62,17 @@ with colA:
             lst_y_closed.append(0)
         lst_x.append(today.__str__())
 
-    data["Target"] = lst_y_opened
+    data["Limit"] = lst_y_opened
     data["Breakdown Time"] = lst_y_closed
     data["Date"] = lst_x
 
-    # print(data["Target"].__len__())
+    # print(data["Limit"].__len__())
 
     fig = px.bar(
         data,
         x="Date",
-        y=["Target", "Breakdown Time"],
-        color_discrete_map={"Target": color.blue, "Breakdown Time": color.skyblue},
+        y=["Limit", "Breakdown Time"],
+        color_discrete_map={"Limit": color.blue, "Breakdown Time": color.skyblue},
         barmode="group",
         text_auto=True,
     )
@@ -88,7 +88,7 @@ with colB:
              "</div>\n", unsafe_allow_html=True)
 
     data = {}
-    for i, opened in enumerate(df_breakdown_weekly_filtered["Target"]):
+    for i, opened in enumerate(df_breakdown_weekly_filtered["Limit"]):
         if i == 0:
             lst_x.append(f"W{i + 1}(01-07)")
             lst_y_opened.append(opened)
@@ -113,16 +113,16 @@ with colB:
             lst_y_closed.append(closed)
 
     data["Weeks"] = lst_x
-    data["Target"] = lst_y_opened
+    data["Limit"] = lst_y_opened
     data["Breakdown Time"] = lst_y_closed
 
     fig = px.bar(
         data,
         x="Weeks",
-        y=["Target", "Breakdown Time"],
+        y=["Limit", "Breakdown Time"],
         barmode="group",
         text_auto=True,
-        color_discrete_map={"Target": color.blue, "Breakdown Time": color.skyblue},
+        color_discrete_map={"Limit": color.blue, "Breakdown Time": color.skyblue},
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -141,13 +141,13 @@ st.write("""
 
 for i in range(1, 13):
     if i < 10:
-        df = df_breakdown_ytd[df_breakdown_ytd["Month"] == f"{year}-0{i}"][["Target"]].fillna(0)
+        df = df_breakdown_ytd[df_breakdown_ytd["Month"] == f"{year}-0{i}"][["Limit"]].fillna(0)
         df_actual = df_breakdown_ytd[df_breakdown_ytd["Month"] == f"{year}-0{i}"][["Breakdown Time"]].fillna(0)
     else:
-        df = df_breakdown_ytd[df_breakdown_ytd["Month"] == f"{year}-{i}"][["Target"]].fillna(0)
+        df = df_breakdown_ytd[df_breakdown_ytd["Month"] == f"{year}-{i}"][["Limit"]].fillna(0)
         df_actual = df_breakdown_ytd[df_breakdown_ytd["Month"] == f"{year}-{i}"][["Breakdown Time"]].fillna(0)
 
-    for j, item in enumerate(df["Target"]):
+    for j, item in enumerate(df["Limit"]):
         lst_x.append(f"{months[i - 1]}'{str(year)[2:]}")
         lst_y_Opened.append(item)
 
@@ -155,14 +155,14 @@ for i in range(1, 13):
         lst_y_Closed.append(item)
 
     data["Months"] = lst_x
-    data["Target"] = lst_y_Opened
+    data["Limit"] = lst_y_Opened
     data["Breakdown Time"] = lst_y_Closed
 
 fig = px.bar(
     data,
     x="Months",
-    y=["Target", "Breakdown Time"],
-    color_discrete_map={"Target": color.blue, "Breakdown Time": color.skyblue},
+    y=["Limit", "Breakdown Time"],
+    color_discrete_map={"Limit": color.blue, "Breakdown Time": color.skyblue},
     barmode="group",
     text_auto=True,
 )

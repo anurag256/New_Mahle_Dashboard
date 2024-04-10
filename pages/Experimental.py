@@ -13,6 +13,9 @@ import os
 
 st.header("This page is for testing only!")
 
+
+
+
 # df_xl = pd.ExcelFile("Excel/Cost/Cost.xlsx")
 # s1 = pd.read_excel(df_xl,'C')
 # cost_df = pd.DataFrame(s1)
@@ -44,49 +47,49 @@ st.header("This page is for testing only!")
 
 # #********* Read all Excel files and write all data in sqlite database files *********#
 # Function to process Excel files in a directory and its subdirectories
-def process_excel_files(root_folder):
-    for root, dirs, files in os.walk(root_folder):
-        for file in files:
-            if file.endswith('.xlsx'):
-                excel_file_path = os.path.join(root, file)
-                process_single_excel(excel_file_path, root)
+# def process_excel_files(root_folder):
+#     for root, dirs, files in os.walk(root_folder):
+#         for file in files:
+#             if file.endswith('.xlsx'):
+#                 excel_file_path = os.path.join(root, file)
+#                 process_single_excel(excel_file_path, root)
 
-# Function to process a single Excel file
-def process_single_excel(excel_file_path, root_folder):
-    xls = pd.ExcelFile(excel_file_path)
+# # Function to process a single Excel file
+# def process_single_excel(excel_file_path, root_folder):
+#     xls = pd.ExcelFile(excel_file_path)
 
-    # Extract the Excel file name (excluding extension)
-    file_name = os.path.splitext(os.path.basename(excel_file_path))[0]
+#     # Extract the Excel file name (excluding extension)
+#     file_name = os.path.splitext(os.path.basename(excel_file_path))[0]
 
-    # Use the Excel file structure to create corresponding directories
-    relative_path = os.path.relpath(os.path.dirname(excel_file_path), root_folder)
-    db_directory = os.path.join('backup/database', relative_path)
-    os.makedirs(db_directory, exist_ok=True)
+#     # Use the Excel file structure to create corresponding directories
+#     relative_path = os.path.relpath(os.path.dirname(excel_file_path), root_folder)
+#     db_directory = os.path.join('backup/database', relative_path)
+#     os.makedirs(db_directory, exist_ok=True)
 
-    # Use the Excel file name as the database name
-    db_url = f'sqlite:///{db_directory}/{file_name}.db'
-    engine = create_engine(db_url)
+#     # Use the Excel file name as the database name
+#     db_url = f'sqlite:///{db_directory}/{file_name}.db'
+#     engine = create_engine(db_url)
 
-    # If the database file doesn't exist, create it
-    if not os.path.exists(f'{db_directory}/{file_name}.db'):
-        engine.connect()
+#     # If the database file doesn't exist, create it
+#     if not os.path.exists(f'{db_directory}/{file_name}.db'):
+#         engine.connect()
 
-    # Iterate through sheets and save each as a table
-    for sheet_name in xls.sheet_names:
-        df = pd.read_excel(xls, sheet_name, header=0)
-        table_name = sheet_name.replace(' ', '_')  # Replace spaces with underscores
-        df.to_sql(table_name, engine, if_exists='replace', index=False)
+#     # Iterate through sheets and save each as a table
+#     for sheet_name in xls.sheet_names:
+#         df = pd.read_excel(xls, sheet_name, header=0)
+#         table_name = sheet_name.replace(' ', '_')  # Replace spaces with underscores
+#         df.to_sql(table_name, engine, if_exists='replace', index=False)
 
-# Specify the root folder containing Excel files
-root_folder = 'Excel' 
+# # Specify the root folder containing Excel files
+# root_folder = 'Excel' 
 
-# Call the function to process Excel files in the specified root folder
-# process_excel_files(root_folder)
+# # Call the function to process Excel files in the specified root folder
+# # process_excel_files(root_folder)
 
-if st.button("Click to get Backup in Database"):
-    process_excel_files(root_folder)
-    st.balloons()
-    st.subheader("Data Backup is Done!")
+# if st.button("Click to get Backup in Database"):
+#     process_excel_files(root_folder)
+#     st.balloons()
+#     st.subheader("Data Backup is Done!")
 
 
 
@@ -293,104 +296,106 @@ colors = ['yellow'] * 31
 #             <div>{svg_file}</div>
 #         """,height=new_height,width=new_width)
 
+
+
 # open_svg('s',new_height=250,new_width=250)
-# def my_alert(day, letter: str):
-#     # Get Date on click
-#     current_year = datetime.datetime.now().year
-#     current_month = datetime.datetime.now().month
-#     new_date = f"{current_year}-{current_month:02d}-{day:02d}"
+def my_alert(day, letter: str):
+    # Get Date on click
+    current_year = datetime.datetime.now().year
+    current_month = datetime.datetime.now().month
+    new_date = f"{current_year}-{current_month:02d}-{day:02d}"
 
-#     match letter:
-#         case 's':
-#             # Get Data from excel file
-#             df_xl = pd.ExcelFile("Excel/Safety/Safety.xlsx")
-#             s1 = pd.read_excel(df_xl, 'Safety Incidences')
-#             safety_df = pd.DataFrame(s1)
+    match letter:
+        case 'S':
+            # Get Data from excel file
+            df_xl = pd.ExcelFile("Excel/Safety/Safety.xlsx")
+            s1 = pd.read_excel(df_xl, 'Safety Incidences')
+            safety_df = pd.DataFrame(s1)
 
-#             # Filter Data according to the date which was click
-#             df_incidence_daily = safety_df[safety_df['Date'] == new_date]
+            # Filter Data according to the date which was click
+            df_incidence_daily = safety_df[safety_df['Date'] == new_date]
 
-#             incident = " "
-#             location = " "
-#             medical = " "
-#             time = " "
-#             action = " "
+            incident = " "
+            location = " "
+            medical = " "
+            time = " "
+            action = " "
 
-#             if (df_incidence_daily['Category'] == 'Lost time Injury & Recordable Accident').any():
-#                 incident =  df_incidence_daily[["Incident"]]["Incident"].to_list()[0]
-#                 location = df_incidence_daily[["Plant Area"]]["Plant Area"].to_list()[0]
-#                 medical = df_incidence_daily[["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
-#                 time = df_incidence_daily[["Time"]]["Time"].to_list()[0]
-#                 action = df_incidence_daily[["Preventinve measures implemented and lessons learnt"]]["Preventinve measures implemented and lessons learnt"].to_list()[0]
+            if (df_incidence_daily['Category'] == 'Lost time Injury & Recordable Accident').any():
+                incident =  df_incidence_daily[["Incident"]]["Incident"].to_list()[0]
+                location = df_incidence_daily[["Plant Area"]]["Plant Area"].to_list()[0]
+                medical = df_incidence_daily[["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
+                time = df_incidence_daily[["Time"]]["Time"].to_list()[0]
+                action = df_incidence_daily[["Preventinve measures implemented and lessons learnt"]]["Preventinve measures implemented and lessons learnt"].to_list()[0]
             
-#             elif (df_incidence_daily['Category'] == 'First Aid').any():
-#                 incident = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Incident"]]["Incident"].to_list()[0]
-#                 location = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Plant Area"]]["Plant Area"].to_list()[0]
-#                 medical = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
-#                 time = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Time"]]["Time"].to_list()[0]
-#                 action = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Preventinve measures implemented and lessons learnt"]]["Preventinve measures implemented and lessons learnt"].to_list()[0]
+            elif (df_incidence_daily['Category'] == 'First Aid').any():
+                incident = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Incident"]]["Incident"].to_list()[0]
+                location = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Plant Area"]]["Plant Area"].to_list()[0]
+                medical = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
+                time = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Time"]]["Time"].to_list()[0]
+                action = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Preventinve measures implemented and lessons learnt"]]["Preventinve measures implemented and lessons learnt"].to_list()[0]
 
-#             elif (df_incidence_daily['Category'] == 'Near Miss').any():
-#                 incident = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Incident"]]["Incident"].to_list()[0]
-#                 location = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Plant Area"]]["Plant Area"].to_list()[0]
-#                 medical = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
-#                 time = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Time"]]["Time"].to_list()[0]
-#                 action = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Preventinve measures implemented and lessons learnt"]]["Preventinve measures implemented and lessons learnt"].to_list()[0]
+            elif (df_incidence_daily['Category'] == 'Near Miss').any():
+                incident = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Incident"]]["Incident"].to_list()[0]
+                location = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Plant Area"]]["Plant Area"].to_list()[0]
+                medical = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
+                time = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Time"]]["Time"].to_list()[0]
+                action = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Preventinve measures implemented and lessons learnt"]]["Preventinve measures implemented and lessons learnt"].to_list()[0]
 
-#             elif (df_incidence_daily['Category'] == 'Fire').any():
-#                 incident = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Incident"]]["Incident"].to_list()[0]
-#                 location = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Plant Area"]]["Plant Area"].to_list()[0]
-#                 medical = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
-#                 time = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Time"]]["Time"].to_list()[0]
-#                 action = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Preventinve measures implemented and lessons learnt"]]["Preventinve measures implemented and lessons learnt"].to_list()[0]
+            elif (df_incidence_daily['Category'] == 'Fire').any():
+                incident = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Incident"]]["Incident"].to_list()[0]
+                location = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Plant Area"]]["Plant Area"].to_list()[0]
+                medical = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
+                time = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Time"]]["Time"].to_list()[0]
+                action = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Preventinve measures implemented and lessons learnt"]]["Preventinve measures implemented and lessons learnt"].to_list()[0]
             
-#             else:
-#                 incident = "None"
-#                 location = "None"
-#                 medical = "None"
-#                 time = "None"
-#                 action = "None"
+            else:
+                incident = "None"
+                location = "None"
+                medical = "None"
+                time = "None"
+                action = "None"
 
-#             return f"""
-#                 function(){{
-#                     alert(`Data is showing on: {new_date} \n\nIncident: {incident} \n\nPlant Area: {location} \n\nAction: {action}`);
-#                 }}
-#             """
+            return f"""
+                function(){{
+                    alert(`Data is showing on: {new_date} \n\nIncident: {incident} \n\nPlant Area: {location} \n\nAction: {action}`);
+                }}
+            """
 
-#         case 'q':
-#             # Get Data from excel file
-#             df_xl = pd.ExcelFile("Excel/Quality/Customer Complaints.xlsx")
-#             s1 = pd.read_excel(df_xl, 'Complaint Details')
-#             complaint_df = pd.DataFrame(s1)
+        case 'q':
+            # Get Data from excel file
+            df_xl = pd.ExcelFile("Excel/Quality/Customer Complaints.xlsx")
+            s1 = pd.read_excel(df_xl, 'Complaint Details')
+            complaint_df = pd.DataFrame(s1)
 
-#             # Filter Data according to the date which was click
-#             df_complaint_daily = complaint_df[complaint_df['Date'] == new_date]
+            # Filter Data according to the date which was click
+            df_complaint_daily = complaint_df[complaint_df['Date'] == new_date]
 
-#             complaint = " "
-#             raise_date = " "
-#             target_date = " "
-#             responsibility = " "
+            complaint = " "
+            raise_date = " "
+            target_date = " "
+            responsibility = " "
 
-#             if (df_complaint_daily['Complaints'] == 'Complaint').any():
-#                 complaint = df_complaint_daily[['Complaint Description']]['Complaint Description'].to_list()[0]
-#                 raise_date = df_complaint_daily[['Raise Date']]['Raise Date'].to_list()[0]
-#                 target_date = df_complaint_daily[['Target Date']]['Target Date'].to_list()[0]
-#                 responsibility = df_complaint_daily[['Responsibility']]['Responsibility'].to_list()[0]
-#             else:
-#                 complaint = 'No Complaint'
-#                 raise_date = 'No Complaint'
-#                 target_date = 'No Complaint'
-#                 responsibility = 'No Complaint'
+            if (df_complaint_daily['Complaints'] == 'Complaint').any():
+                complaint = df_complaint_daily[['Complaint Description']]['Complaint Description'].to_list()[0]
+                raise_date = df_complaint_daily[['Raise Date']]['Raise Date'].to_list()[0]
+                target_date = df_complaint_daily[['Target Date']]['Target Date'].to_list()[0]
+                responsibility = df_complaint_daily[['Responsibility']]['Responsibility'].to_list()[0]
+            else:
+                complaint = 'No Complaint'
+                raise_date = 'No Complaint'
+                target_date = 'No Complaint'
+                responsibility = 'No Complaint'
 
-#             return f"""
-#                 function(){{
-#                     swal(`Data is showing on: {new_date} \n\nComplaint: {complaint} \n\nRaise Date: {raise_date} \n\nTarget Date: {target_date} \n\nResponsibility: {responsibility}`);
-#                 }}
-#             """
-#         case 'd':
-#             pass
-#         case 'c':
-#             pass
+            return f"""
+                function(){{
+                    swal(`Data is showing on: {new_date} \n\nComplaint: {complaint} \n\nRaise Date: {raise_date} \n\nTarget Date: {target_date} \n\nResponsibility: {responsibility}`);
+                }}
+            """
+        case 'd':
+            pass
+        case 'c':
+            pass
 
 
 # # Open and read SVG file
@@ -417,23 +422,33 @@ colors = ['yellow'] * 31
 #         """, height=350, width=250)
 
 
-# def svg_loader(letter):
-#     with open(f'resources/SVG-out/{letter}.svg', 'r') as f:
-#         svg_img = f.read()
-#         stcomp.html(f"""
-#             <div>{svg_img}</div>
-#             <script type="text/javascript">
-#                 function attachClickEvent(elementId, clickFunction) {{
-#                     var element = document.getElementById(elementId);
-#                     if (element) {{
-#                         element.addEventListener('click', clickFunction);
-#                     }}
-#                 }}
-#                 {"".join([f"attachClickEvent('untitled-u-day{i}', {my_alert(i, letter)});" for i in range(1, 10)])}
-#                 {"".join([f"attachClickEvent('untitled-u-day{i}_', {my_alert(i, letter)});" for i in range(10, 32)])}
-#             </script>
-#         """, height=250, width=250)
+def temp_svg_loader(letter):
+    with open(f'resources/{letter}.svg', 'r') as f:
+        svg_img = f.read()
+        stcomp.html(f"""
+            <div>{svg_img}</div>
+            <script type="text/javascript">
+                function attachClickEvent(elementId, clickFunction) {{
+                    var element = document.getElementById(elementId);
+                    if (element) {{
+                        element.addEventListener('click', clickFunction);
+                    }}
+                }}
+                {"".join([
+                    f"attachClickEvent('untitled-u-day{i}', {my_alert(i, letter)}) || "
+                    f"attachClickEvent('untitled-u-text{i}', {my_alert(i, letter)});" 
+                    for i in range(1, 10)])}
+                {"".join([
+                    f"attachClickEvent('untitled-u-day{i}_', {my_alert(i, letter)}) || "
+                    f"attachClickEvent('untitled-u-text{i}', {my_alert(i, letter)});" 
+                    for i in range(10, 32)])}
+            </script>
+        """, height=250, width=250)
 
+# {"".join([f"attachClickEvent('untitled-u-day{i}', {my_alert(i, letter)});" for i in range(1, 10)])}
+# {"".join([f"attachClickEvent('untitled-u-day{i}_', {my_alert(i, letter)});" for i in range(10, 32)])}
+
+temp_svg_loader('S')
 # col1,col2,col3,col4 = st.columns((0.5,1,1,0.5))
 # with col2:
 #     new_svg_loader('s')

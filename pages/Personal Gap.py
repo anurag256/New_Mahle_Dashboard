@@ -6,7 +6,7 @@ import plotly.express as px
 from methods.colours import color
 from methods.styles import back_btn, header, horizontal_line
 
-header("Personal Gap")
+header("Personnel")
 
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul',
           'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -63,7 +63,7 @@ df_per_weekly_filtered = df_per_weekly[df_per_weekly["Month"] == f"{year}-{curre
 card1, card2, card3, card4, card5 = st.columns((1, 1, 1, 1, 1))
 with card2:
     try:
-        req = df_per_daily[df_per_daily["Date"] == pd.to_datetime(date)]["Planned Manpower Required (K)"].tolist()[0]
+        req = int(df_per_daily[df_per_daily["Date"] == pd.to_datetime(date)]["Planned Manpower Required (K)"].tolist()[0])
         per = df_per_daily[df_per_daily["Date"] == pd.to_datetime(date)]["Actual Manpower Available (L)"].tolist()[0]
         gap = df_per_daily[df_per_daily["Date"] == pd.to_datetime(date)]["Personal Gap (PG)"].tolist()[0]
     except Exception as e:
@@ -72,20 +72,20 @@ with card2:
         per = "Update"
         gap = "Update"
 
-    st.markdown(f"<div class=\"custom\" style='background-color:{color.blue}; color:{color.white}'>Required Manpower :\n"
+    st.markdown(f"<div class=\"custom\" style='background-color:{color.blue}; color:{color.white}'>Required Headcount :\n"
                 f"                            <h4>{req}</h4></div>", unsafe_allow_html=True)
 with card3:
-    st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue};'>Available Manpower :\n"
-                f"                            <h4>{per}</h4></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue};'>Total Headcount :\n"
+                f"                            <h4>{int(per)}</h4></div>", unsafe_allow_html=True)
 with card4:
-    st.markdown(f"<div class=\"custom\" style='background-color:{color.red};'>Personal Gap :\n"
-                f"                            <h4>{gap} %</h4></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class=\"custom\" style='background-color:#c4bab9;'>Absenteeism:\n"
+                f"                            <h4>{gap}%</h4></div>", unsafe_allow_html=True)
 
 main_col1, main_col2 = st.columns((1, 1))
 with main_col1:
     st.write("\n"
              "                                      <div class = \"heading\">\n"
-             "                                          Daily Trends\n"
+             "                                          Daily Headcount Trend\n"
              "                                      </div>\n"
              "                                  ", unsafe_allow_html=True)
     data = {}
@@ -108,8 +108,8 @@ with main_col1:
             lst_y_closed.append(0)
         lst_x.append(today.__str__())
 
-    data["Required"] = lst_y_opened
-    data["Available"] = lst_y_closed
+    data["Required HC"] = lst_y_opened
+    data["Total HC"] = lst_y_closed
     data["Date"] = lst_x
 
     # print(data["Target"].__len__())
@@ -117,8 +117,8 @@ with main_col1:
     fig = px.bar(
         data,
         x="Date",
-        y=["Required", "Available"],
-        color_discrete_map={"Required": color.blue, "Available": color.skyblue},
+        y=["Required HC", "Total HC"],
+        color_discrete_map={"Required HC": color.blue, "Total HC": color.skyblue},
         barmode="group",
         text_auto=True,
         labels= {
@@ -135,7 +135,7 @@ with main_col2:
 
     st.write("\n"
              "                                  <div class = \"heading\">\n"
-             "                                      Weekly Trends\n"
+             "                                      Weekly Headcount Trend\n"
              "                                  </div>\n"
              "                              ", unsafe_allow_html=True)
     data = {}
@@ -166,16 +166,16 @@ with main_col2:
             lst_y_closed.append(closed)
 
     data["Weeks"] = lst_x
-    data["Target PG"] = lst_y_opened
-    data["Actual PG"] = lst_y_closed
+    data["Required HC"] = lst_y_opened
+    data["Total HC"] = lst_y_closed
 
     fig = px.bar(
         data,
         x="Weeks",
-        y=["Target PG", "Actual PG"],
+        y=["Required HC", "Total HC"],
         barmode="group",
         text_auto=True,
-        color_discrete_map={"Target PG": color.blue, "Actual PG": color.skyblue},
+        color_discrete_map={"Required HC": color.blue, "Total HC": color.skyblue},
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -188,7 +188,7 @@ lst_y_Closed = list()
 
 st.write("""
              <div class = "heading">
-                 Monthly Trends
+                 Monthly Sales/Headcount Trend
              </div>
          """, unsafe_allow_html=True)
 # print(df_safety_filtered_monthly)
@@ -208,14 +208,14 @@ for i in range(1, 13):
         lst_y_Closed.append(item)
 
     data["Months"] = lst_x
-    data["Target PG"] = lst_y_Opened
-    data["Actual PG"] = lst_y_Closed
+    data["Target"] = lst_y_Opened
+    data["Actual"] = lst_y_Closed
 
 fig = px.bar(
     data,
     x="Months",
-    y=["Target PG", "Actual PG"],
-    color_discrete_map={"Target PG": color.blue, "Actual PG": color.skyblue},
+    y=["Target", "Actual"],
+    color_discrete_map={"Target": color.blue, "Actual": color.skyblue},
     barmode="group",
     text_auto=True,
 )

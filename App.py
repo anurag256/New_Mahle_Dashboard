@@ -99,6 +99,7 @@ main_body_col1, main_body_col_spacer, main_body_col2 = st.columns((5, 0.1, 2))
 with main_body_col1:
     color_dict = {"s": [], "q": [], "d": [], "c": []}
     for item in safety_monthly["Category"]:
+        # print(f"Incident: {item}")
         if item == "No Accident":
             color_dict["s"].append(color.green)
         if item == "Plant off":
@@ -142,6 +143,7 @@ with main_body_col1:
     # print(quality_monthly["Date"])
     image_list = ['s', 'q', 'd', 'c']
     for image in image_list:
+        # print(color_dict[f"{image}"], f"{image}")
         th = Thread(target=lambda: new_svg_gen(color_dict[f"{image}"], f"{image}"))
         th.start()
         th.join()
@@ -150,7 +152,7 @@ with main_body_col1:
     with image_col1:
         sub_heading("Safety")
         # image_loader(name="s", left=15, top=-1.5)
-        new_svg_loader(name="s", left=15, top=-13, height=210, width=205)
+        new_svg_loader(name="s", left=15, top=-13, height=210, width=215)
         st.write("\n"
                  "                <center>\n"
                  "                <span style = \"font-size:56px;\"> </span>\n"
@@ -171,7 +173,7 @@ with main_body_col1:
         horizontal_line()
         sub_heading("Delivery")
         # image_loader(name="d", height=20, top=1, left=15)
-        new_svg_loader(name="d", top=-13, left=15, height=205, width=205)
+        new_svg_loader(name="d", top=-13, left=15, height=210, width=215)
         st.write("\n"
                  "            <center>\n"
                  f"                <div class = \"custom-font\"><b>{delivery_since}</b> days since OE delivery Failure</div>\n"
@@ -186,7 +188,7 @@ with main_body_col1:
             "Quality"
         )
         # image_loader(name="q", height=13, top=0, left=15)
-        new_svg_loader(name="q", top=-13, left=15, height=205, width=205)
+        new_svg_loader(name="q", top=-13, left=15, height=205, width=215)
         st.write("\n"
                  "                    <center>\n"
                  f"                        <div class = \"custom-font-1\"><b>{customer_comp_since}</b> days since Customer Complaints</div>\n"
@@ -202,7 +204,7 @@ with main_body_col1:
         horizontal_line()
         sub_heading("Cost")
         # image_loader(name="c", height=12, left=15, top=0)
-        new_svg_loader(name="c", left=15, top=-13, height=205, width=205)
+        new_svg_loader(name="c", left=15, top=-13, height=210, width=215)
         st.write("\n"
                  "                    <center>\n"
                  f"                        <div class = \"custom-font\"><b>{cost_since}</b> days since Productivity Target Missed</div>\n"
@@ -252,7 +254,7 @@ with main_body_col2:
     with col_selector:
         # "Critical Customer PDI",
         deliverySelection = st.selectbox("Delivery",
-                                         ["Delivery FTD", "Sale Plan vs Actual", "OTIF", "Critical Customer PDI"],
+                                         ["Delivery FTD", "Sale Plan vs Actual", "OTIF"],   # , "Critical Customer PDI"
                                          key='personal', index=None, placeholder="Delivery", label_visibility="hidden")
 
     col_icon, col_selector = st.columns((1, 2))
@@ -277,8 +279,8 @@ with main_body_col2:
         # st.markdown("<br>", unsafe_allow_html=True)
         st.image("resources/Icons/personal.svg", width=50)
     with col_selector:
-        personalSelection = st.selectbox("Personal", [
-            "Personal Gap", "Visits/Audits"], key='cost', index=None, placeholder="Personal",
+        personalSelection = st.selectbox("Personnel", [
+            "Headcount", "Visits/Audits"], key='cost', index=None, placeholder="Personnel",
                                          label_visibility="hidden")
 
     # col_icon, col_selector = st.columns((1, 2))
@@ -333,11 +335,11 @@ match deliverySelection:
         switch_page("Sale Plan Vs Actual")
     case "OTIF":
         switch_page("OTIF")
-    case "Critical Customer PDI":
-        switch_page("Critical Customer PDI")
+    # case "Critical Customer PDI":
+    #     switch_page("Critical Customer PDI")
 
 match personalSelection:
-    case "Personal Gap":
+    case "Headcount":
         switch_page("Personal Gap")
     case "Visits/Audits":
         switch_page("Audits")

@@ -129,7 +129,8 @@ except:
     fire = 0
 
 #  for labels
-df_incidence_daily = df_incidence_details[df_incidence_details["Date"] == today]
+# df_incidence_daily = df_incidence_details[df_incidence_details["Date"] == today]
+df_incidence_daily = df_incidence_details.iloc[0]
 # print(df_incidence_daily[["Incident"]])
 
 incident_lost = " "
@@ -156,7 +157,7 @@ medical_fire = " "
 time_fire = " "
 action_fire = " "
 
-if (df_incidence_daily['Category'] == 'Lost time Injury & Recordable Accident').any():
+if (df_incidence_daily['Category'] == 'Lost time Injury & Recordable Accident'):
     incident_lost =  df_incidence_daily[["Incident"]]["Incident"].to_list()[0]
     location_lost = df_incidence_daily[["Plant Area"]]["Plant Area"].to_list()[0]
     medical_lost = df_incidence_daily[["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
@@ -169,7 +170,7 @@ else:
     time_lost = "None"
     action_lost = "None"
     
-if (df_incidence_daily['Category'] == 'First Aid').any():
+if (df_incidence_daily['Category'] == 'First Aid'):
     incident_first = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Incident"]]["Incident"].to_list()[0]
     location_fist = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Plant Area"]]["Plant Area"].to_list()[0]
     medical_first = df_incidence_daily[df_incidence_daily['Category'] == 'First Aid'][["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
@@ -182,7 +183,7 @@ else:
     time_fist = "None"
     action_first = "None"
 
-if (df_incidence_daily['Category'] == 'Near Miss').any():
+if (df_incidence_daily['Category'] == 'Near Miss'):
     incident_near = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Incident"]]["Incident"].to_list()[0]
     location_near = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Plant Area"]]["Plant Area"].to_list()[0]
     medical_near = df_incidence_daily[df_incidence_daily['Category'] == 'Near Miss'][["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]
@@ -195,7 +196,7 @@ else:
     time_near = "None"
     action_near = "None"
 
-if (df_incidence_daily['Category'] == 'Fire').any():
+if (df_incidence_daily['Category'] == 'Fire'):
     incident_fire = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Incident"]]["Incident"].to_list()[0]
     location_fire = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Plant Area"]]["Plant Area"].to_list()[0]
     medical_fire = df_incidence_daily[df_incidence_daily['Category'] == 'Fire'][["Medical Aid Given"]]["Medical Aid Given"].to_list()[0]

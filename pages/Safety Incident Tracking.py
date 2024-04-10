@@ -92,13 +92,13 @@ with card2:
                 f"                            <h4>{recordable_accident}</h4></div>", unsafe_allow_html=True)
 with card3:
     st.markdown(f"<div class=\"custom\" style='background-color:{color.orange};'>Monthly Fire Incidence:\n"
-                f"                           <h4>{firstaid}</h4></div>", unsafe_allow_html=True)
+                f"                           <h4>{fire}</h4></div>", unsafe_allow_html=True)
 with card4:
     st.markdown(f"<div class=\"custom\" style='background-color:{color.yellow};'>Monthly First Aid:\n"
-                f"                           <h4>{near_miss}</h4></div>", unsafe_allow_html=True)
+                f"                           <h4>{firstaid}</h4></div>", unsafe_allow_html=True)
 with card5:
     st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue};'>Monthly Near Miss:\n"
-                f"                           <h4>{fire}</h4></div>", unsafe_allow_html=True)
+                f"                           <h4>{near_miss}</h4></div>", unsafe_allow_html=True)
 
 horizontal_line()
 
@@ -112,7 +112,7 @@ with daily:
     data = {}
     lst_x_daily = []
     lst_y_daily = []
-    for i in range(7, 0, -1):
+    for i in range(30, 0, -1):
         today = date - datetime.timedelta(days=i)
         today_pd = pd.to_datetime(today)
         df = df_safety_daily[df_safety_daily["Date"] == today_pd]

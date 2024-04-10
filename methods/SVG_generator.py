@@ -183,5 +183,7 @@ def new_svg_gen(colors: list, name: str) -> str:
             return "Please Provide Name of Alphabet"
 
 
+
+
 if __name__ == "__main__":
     log.debug(svg_gen(["blue", "blue", "purple"], "c"))

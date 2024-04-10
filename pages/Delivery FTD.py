@@ -69,47 +69,47 @@ xls_Export_weekly = pd.read_excel(xls_Export, "Weekly Data")
 xls_Export_monthly = pd.read_excel(xls_Export, "Monthly Data")
 
 # ************ Critical Customer PDI Data Fetch ************ #
-xls_Ford = pd.ExcelFile("Excel/Delivery/CCPDI/Ford.xlsx")
-xls_Ford_daily = pd.read_excel(xls_Ford, "Daily Data")
-xls_Ford_weekly = pd.read_excel(xls_Ford, "Weekly Data")
-xls_Ford_monthly = pd.read_excel(xls_Ford, "Monthly Data")
+# xls_Ford = pd.ExcelFile("Excel/Delivery/CCPDI/Ford.xlsx")
+# xls_Ford_daily = pd.read_excel(xls_Ford, "Daily Data")
+# xls_Ford_weekly = pd.read_excel(xls_Ford, "Weekly Data")
+# xls_Ford_monthly = pd.read_excel(xls_Ford, "Monthly Data")
 
-xls_GM = pd.ExcelFile("Excel/Delivery/CCPDI/GM Data.xlsx")
-xls_GM_daily = pd.read_excel(xls_GM, "Daily Data")
-xls_GM_weekly = pd.read_excel(xls_GM, "Weekly Data")
-xls_GM_monthly = pd.read_excel(xls_GM, "Monthly Data")
+# xls_GM = pd.ExcelFile("Excel/Delivery/CCPDI/GM Data.xlsx")
+# xls_GM_daily = pd.read_excel(xls_GM, "Daily Data")
+# xls_GM_weekly = pd.read_excel(xls_GM, "Weekly Data")
+# xls_GM_monthly = pd.read_excel(xls_GM, "Monthly Data")
 
-xls_HD = pd.ExcelFile("Excel/Delivery/CCPDI/HD Data.xlsx")
-xls_HD_daily = pd.read_excel(xls_HD, "Daily Data")
-xls_HD_weekly = pd.read_excel(xls_HD, "Weekly Data")
-xls_HD_monthly = pd.read_excel(xls_HD, "Monthly Data")
+# xls_HD = pd.ExcelFile("Excel/Delivery/CCPDI/HD Data.xlsx")
+# xls_HD_daily = pd.read_excel(xls_HD, "Daily Data")
+# xls_HD_weekly = pd.read_excel(xls_HD, "Weekly Data")
+# xls_HD_monthly = pd.read_excel(xls_HD, "Monthly Data")
 
-xls_Honda = pd.ExcelFile("Excel/Delivery/CCPDI/Honda.xlsx")
-xls_Honda_daily = pd.read_excel(xls_Honda, "Daily Data")
-xls_Honda_weekly = pd.read_excel(xls_Honda, "Weekly Data")
-xls_Honda_monthly = pd.read_excel(xls_Honda, "Monthly Data")
+# xls_Honda = pd.ExcelFile("Excel/Delivery/CCPDI/Honda.xlsx")
+# xls_Honda_daily = pd.read_excel(xls_Honda, "Daily Data")
+# xls_Honda_weekly = pd.read_excel(xls_Honda, "Weekly Data")
+# xls_Honda_monthly = pd.read_excel(xls_Honda, "Monthly Data")
 
-xls_MSIL = pd.ExcelFile("Excel/Delivery/CCPDI/MSIL.xlsx")
-xls_MSIL_daily = pd.read_excel(xls_MSIL, "Daily Data")
-xls_MSIL_weekly = pd.read_excel(xls_MSIL, "Weekly Data")
-xls_MSIL_monthly = pd.read_excel(xls_MSIL, "Monthly Data")
+# xls_MSIL = pd.ExcelFile("Excel/Delivery/CCPDI/MSIL.xlsx")
+# xls_MSIL_daily = pd.read_excel(xls_MSIL, "Daily Data")
+# xls_MSIL_weekly = pd.read_excel(xls_MSIL, "Weekly Data")
+# xls_MSIL_monthly = pd.read_excel(xls_MSIL, "Monthly Data")
 
-xls_RNAIPL = pd.ExcelFile("Excel/Delivery/CCPDI/RNAIPL.xlsx")
-xls_RNAIPL_daily = pd.read_excel(xls_RNAIPL, "Daily Data")
-xls_RNAIPL_weekly = pd.read_excel(xls_RNAIPL, "Weekly Data")
-xls_RNAIPL_monthly = pd.read_excel(xls_RNAIPL, "Monthly Data")
+# xls_RNAIPL = pd.ExcelFile("Excel/Delivery/CCPDI/RNAIPL.xlsx")
+# xls_RNAIPL_daily = pd.read_excel(xls_RNAIPL, "Daily Data")
+# xls_RNAIPL_weekly = pd.read_excel(xls_RNAIPL, "Weekly Data")
+# xls_RNAIPL_monthly = pd.read_excel(xls_RNAIPL, "Monthly Data")
 
 xls_OE_daily = xls_OE_daily[xls_OE_daily['Date'] == today_pd]
 xls_OE_Spare_daily = xls_OE_Spare_daily[xls_OE_Spare_daily['Date'] == today_pd]
 xls_Aftermarket_daily = xls_Aftermarket_daily[xls_Aftermarket_daily['Date'] == today_pd]
 xls_Export_daily = xls_Export_daily[xls_Export_daily['Date'] == today_pd]
 
-xls_Ford_daily = xls_Ford_daily[xls_Ford_daily['Date'] == today_pd]
-xls_GM_daily = xls_GM_daily[xls_GM_daily['Date'] == today_pd]
-xls_HD_daily = xls_HD_daily[xls_HD_daily['Date'] == today_pd]
-xls_Honda_daily = xls_Honda_daily[xls_Honda_daily['Date'] == today_pd]
-xls_MSIL_daily = xls_MSIL_daily[xls_MSIL_daily['Date'] == today_pd]
-xls_RNAIPL_daily = xls_RNAIPL_daily[xls_RNAIPL_daily['Date'] == today_pd]
+# xls_Ford_daily = xls_Ford_daily[xls_Ford_daily['Date'] == today_pd]
+# xls_GM_daily = xls_GM_daily[xls_GM_daily['Date'] == today_pd]
+# xls_HD_daily = xls_HD_daily[xls_HD_daily['Date'] == today_pd]
+# xls_Honda_daily = xls_Honda_daily[xls_Honda_daily['Date'] == today_pd]
+# xls_MSIL_daily = xls_MSIL_daily[xls_MSIL_daily['Date'] == today_pd]
+# xls_RNAIPL_daily = xls_RNAIPL_daily[xls_RNAIPL_daily['Date'] == today_pd]
 
 col_main_body_1, col_main_body_2, col_main_body_3 = st.columns((2,0.5,5))
 
@@ -122,7 +122,7 @@ with col_main_body_2:
 
 with col_main_body_3:
 
-    tab1, tab2, tab3 = st.tabs(["Plan vs Actual Sale", "OTIF", "Critical Customer PDI"])
+    tab1, tab2 = st.tabs(["Plan vs Actual Sale", "OTIF"])     # , "Critical Customer PDI"
 
     with tab1:
         colA, colB = st.columns((1, 1))
@@ -229,126 +229,126 @@ with col_main_body_3:
                             f'                            <h4>{Export_actual}</h4></div>',
                             unsafe_allow_html=True)
                             
-    with tab3:
-        sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5, sub_tab6 = st.tabs(["Ford", "GM", "HD", "Honda", "MSIL", "RNAIPL"])
-        with sub_tab1:
-            colA, colB = st.columns((1, 1))
-            with colA:
-                try:
-                    Ford_target = xls_Ford_daily["Target"].tolist()[0]
-                except Exception as e:
-                    print(e)
-                    Ford_target = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
-                            f'                            <h4>{Ford_target}</h4></div>',
-                            unsafe_allow_html=True)
-            with colB:
-                try:
-                    Ford_actual = round(xls_Ford_daily["Actual"].tolist()[0])
-                except Exception as e:
-                    print(e)
-                    Ford_actual = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
-                            f'                            <h4>{Ford_actual}</h4></div>',
-                            unsafe_allow_html=True)
-        with sub_tab2:
-            colA, colB = st.columns((1, 1))
-            with colA:
-                try:
-                    GM_target = xls_GM_daily["Target"].tolist()[0]
-                except Exception as e:
-                    print(e)
-                    GM_target = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
-                            f'                            <h4>{GM_target}</h4></div>',
-                            unsafe_allow_html=True)
-            with colB:
-                try:
-                    GM_actual = round(xls_GM_daily["Actual"].tolist()[0])
-                except Exception as e:
-                    print(e)
-                    GM_actual = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
-                            f'                            <h4>{GM_actual}</h4></div>',
-                            unsafe_allow_html=True)
-        with sub_tab3:
-            colA, colB = st.columns((1, 1))
-            with colA:
-                try:
-                    HD_target = xls_HD_daily["Target"].tolist()[0]
-                except Exception as e:
-                    print(e)
-                    HD_target = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
-                            f'                            <h4>{HD_target}</h4></div>',
-                            unsafe_allow_html=True)
-            with colB:
-                try:
-                    HD_actual = round(xls_HD_daily["Actual"].tolist()[0])
-                except Exception as e:
-                    print(e)
-                    HD_actual = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
-                            f'                            <h4>{HD_actual}</h4></div>',
-                            unsafe_allow_html=True)
-        with sub_tab4:
-            colA, colB = st.columns((1, 1))
-            with colA:
-                try:
-                    Honda_target = xls_Honda_daily["Target"].tolist()[0]
-                except Exception as e:
-                    print(e)
-                    Honda_target = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
-                            f'                            <h4>{Honda_target}</h4></div>',
-                            unsafe_allow_html=True)
-            with colB:
-                try:
-                    Honda_actual = round(xls_Honda_daily["Actual"].tolist()[0])
-                except Exception as e:
-                    print(e)
-                    Honda_actual = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
-                            f'                            <h4>{Honda_actual}</h4></div>',
-                            unsafe_allow_html=True)
-        with sub_tab5:
-            colA, colB = st.columns((1, 1))
-            with colA:
-                try:
-                    MSIL_target = xls_MSIL_daily["Target"].tolist()[0]
-                except Exception as e:
-                    print(e)
-                    MSIL_target = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
-                            f'                            <h4>{MSIL_target}</h4></div>',
-                            unsafe_allow_html=True)
-            with colB:
-                try:
-                    MSIL_actual = round(xls_MSIL_daily["Actual"].tolist()[0])
-                except Exception as e:
-                    print(e)
-                    MSIL_actual = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
-                            f'                            <h4>{MSIL_actual}</h4></div>',
-                            unsafe_allow_html=True)
-        with sub_tab6:
-            colA, colB = st.columns((1, 1))
-            with colA:
-                try:
-                    RNAIPL_target = xls_RNAIPL_daily["Target"].tolist()[0]
-                except Exception as e:
-                    print(e)
-                    RNAIPL_target = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
-                            f'                            <h4>{RNAIPL_target}</h4></div>',
-                            unsafe_allow_html=True)
-            with colB:
-                try:
-                    RNAIPL_actual = round(xls_RNAIPL_daily["Actual"].tolist()[0])
-                except Exception as e:
-                    print(e)
-                    RNAIPL_actual = "Update"
-                st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
-                            f'                            <h4>{RNAIPL_actual}</h4></div>',
-                            unsafe_allow_html=True)
+    # with tab3:
+    #     sub_tab1, sub_tab2, sub_tab3, sub_tab4, sub_tab5, sub_tab6 = st.tabs(["Ford", "GM", "HD", "Honda", "MSIL", "RNAIPL"])
+    #     with sub_tab1:
+    #         colA, colB = st.columns((1, 1))
+    #         with colA:
+    #             try:
+    #                 Ford_target = xls_Ford_daily["Target"].tolist()[0]
+    #             except Exception as e:
+    #                 print(e)
+    #                 Ford_target = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
+    #                         f'                            <h4>{Ford_target}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #         with colB:
+    #             try:
+    #                 Ford_actual = round(xls_Ford_daily["Actual"].tolist()[0])
+    #             except Exception as e:
+    #                 print(e)
+    #                 Ford_actual = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
+    #                         f'                            <h4>{Ford_actual}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #     with sub_tab2:
+    #         colA, colB = st.columns((1, 1))
+    #         with colA:
+    #             try:
+    #                 GM_target = xls_GM_daily["Target"].tolist()[0]
+    #             except Exception as e:
+    #                 print(e)
+    #                 GM_target = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
+    #                         f'                            <h4>{GM_target}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #         with colB:
+    #             try:
+    #                 GM_actual = round(xls_GM_daily["Actual"].tolist()[0])
+    #             except Exception as e:
+    #                 print(e)
+    #                 GM_actual = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
+    #                         f'                            <h4>{GM_actual}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #     with sub_tab3:
+    #         colA, colB = st.columns((1, 1))
+    #         with colA:
+    #             try:
+    #                 HD_target = xls_HD_daily["Target"].tolist()[0]
+    #             except Exception as e:
+    #                 print(e)
+    #                 HD_target = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
+    #                         f'                            <h4>{HD_target}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #         with colB:
+    #             try:
+    #                 HD_actual = round(xls_HD_daily["Actual"].tolist()[0])
+    #             except Exception as e:
+    #                 print(e)
+    #                 HD_actual = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
+    #                         f'                            <h4>{HD_actual}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #     with sub_tab4:
+    #         colA, colB = st.columns((1, 1))
+    #         with colA:
+    #             try:
+    #                 Honda_target = xls_Honda_daily["Target"].tolist()[0]
+    #             except Exception as e:
+    #                 print(e)
+    #                 Honda_target = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
+    #                         f'                            <h4>{Honda_target}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #         with colB:
+    #             try:
+    #                 Honda_actual = round(xls_Honda_daily["Actual"].tolist()[0])
+    #             except Exception as e:
+    #                 print(e)
+    #                 Honda_actual = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
+    #                         f'                            <h4>{Honda_actual}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #     with sub_tab5:
+    #         colA, colB = st.columns((1, 1))
+    #         with colA:
+    #             try:
+    #                 MSIL_target = xls_MSIL_daily["Target"].tolist()[0]
+    #             except Exception as e:
+    #                 print(e)
+    #                 MSIL_target = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
+    #                         f'                            <h4>{MSIL_target}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #         with colB:
+    #             try:
+    #                 MSIL_actual = round(xls_MSIL_daily["Actual"].tolist()[0])
+    #             except Exception as e:
+    #                 print(e)
+    #                 MSIL_actual = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
+    #                         f'                            <h4>{MSIL_actual}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #     with sub_tab6:
+    #         colA, colB = st.columns((1, 1))
+    #         with colA:
+    #             try:
+    #                 RNAIPL_target = xls_RNAIPL_daily["Target"].tolist()[0]
+    #             except Exception as e:
+    #                 print(e)
+    #                 RNAIPL_target = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.blue}; color:{color.white}\'>Target:\n'
+    #                         f'                            <h4>{RNAIPL_target}</h4></div>',
+    #                         unsafe_allow_html=True)
+    #         with colB:
+    #             try:
+    #                 RNAIPL_actual = round(xls_RNAIPL_daily["Actual"].tolist()[0])
+    #             except Exception as e:
+    #                 print(e)
+    #                 RNAIPL_actual = "Update"
+    #             st.markdown(f'<div class="custom" style=\'background-color:{color.skyblue};\'>Actual :\n'
+    #                         f'                            <h4>{RNAIPL_actual}</h4></div>',
+    #                         unsafe_allow_html=True)
 

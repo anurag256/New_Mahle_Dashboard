@@ -64,7 +64,7 @@ print(df_oee_daily)
 
 # filtered data
 df_human_prod_weekly_filtered = df_human_prod_weekly[df_human_prod_weekly["Month"] == f"{year}-{current_month}"]
-df_oee_weekly_filtered = df_human_prod_weekly[df_human_prod_weekly["Month"] == f"{year}-{current_month}"]
+df_oee_weekly_filtered = df_oee_weekly[df_oee_weekly["Month"] == f"{year}-{current_month}"]
 
 tab1, tab2 = st.tabs(["Human Productivity", "Plant Aggregate OEE"])
 
@@ -84,11 +84,11 @@ with tab1:
 
     with card2:
         st.markdown(f"<div class=\"custom\" style='background-color:{color.blue}; color:{color.white}'>Monthly Target:\n"
-                    f"                            <h4>{target}%</h4></div>", unsafe_allow_html=True)
+                    f"                            <h4>{target}</h4></div>", unsafe_allow_html=True)
 
     with card3:
         st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue};'>Monthly Actual:\n"
-                    f"                            <h4>{actual}%</h4></div>", unsafe_allow_html=True)
+                    f"                            <h4>{actual}</h4></div>", unsafe_allow_html=True)
 
     horizontal_line()
 
@@ -182,8 +182,8 @@ with tab1:
                 lst_y_closed.append(closed)
 
         data["Weeks"] = lst_x
-        data["Target"] = lst_y_closed
-        data["Actual"] = lst_y_opened
+        data["Target"] = lst_y_opened
+        data["Actual"] = lst_y_closed
         # print(data)
         fig = px.bar(
             data,
@@ -261,11 +261,11 @@ with tab2:
 
     with card2:
         st.markdown(f"<div class=\"custom\" style='background-color:{color.blue}; color:{color.white}'>Monthly Target:\n"
-                    f"                            <h4>{target}%</h4></div>", unsafe_allow_html=True)
+                    f"                            <h4>{target}</h4></div>", unsafe_allow_html=True)
 
     with card3:
         st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue};'>Monthly Actual:\n"
-                    f"                            <h4>{actual}%</h4></div>", unsafe_allow_html=True)
+                    f"                            <h4>{actual}</h4></div>", unsafe_allow_html=True)
 
     horizontal_line()
 
@@ -334,7 +334,7 @@ with tab2:
             df = df_oee_weekly_filtered[df_oee_weekly_filtered["Month"] == f"{year}-{month}"].reset_index(
                 drop=True)
 
-        # print(df["Opened"])
+        print(df)
 
         for i, opened in enumerate(df["Target"]):
             if i == 0:
@@ -361,8 +361,8 @@ with tab2:
                 lst_y_closed.append(closed)
 
         data["Weeks"] = lst_x
-        data["Target"] = lst_y_closed
-        data["Actual"] = lst_y_opened
+        data["Target"] = lst_y_opened
+        data["Actual"] = lst_y_closed
         # print(data)
         fig = px.bar(
             data,

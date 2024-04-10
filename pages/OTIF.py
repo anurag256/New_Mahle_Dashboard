@@ -407,99 +407,99 @@ with tab3:
             st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue};'>Monthly Actual :\n"
                         f"                            <h4>{actual}</h4></div>", unsafe_allow_html=True)
     colA, colB = st.columns((1, 1))
-    with colA:
-        st.write("\n"
-                 "                                      <div class = \"heading\">\n"
-                 "                                          Daily Trends\n"
-                 "                                      </div>\n"
-                 "                                  ", unsafe_allow_html=True)
-        data = {}
-        lst_x = []
-        lst_y_opened = []
-        lst_y_closed = []
+    # with colA:
+    #     st.write("\n"
+    #              "                                      <div class = \"heading\">\n"
+    #              "                                          Daily Trends\n"
+    #              "                                      </div>\n"
+    #              "                                  ", unsafe_allow_html=True)
+    #     data = {}
+    #     lst_x = []
+    #     lst_y_opened = []
+    #     lst_y_closed = []
 
-        for i in range(7, 0, -1):
-            today = date - datetime.timedelta(days=i)
-            today_pd = pd.to_datetime(today)
-            df = df_after_market_daily[df_after_market_daily["Date"] == today_pd]
-            count = 0
-            # print(df)
-            try:
-                lst_y_opened.append(df["Target"].tolist()[0])
-                lst_y_closed.append(df["Actual"].tolist()[0])
-            except Exception as e:
-                print(e)
-                lst_y_opened.append(0)
-                lst_y_closed.append(0)
-            lst_x.append(today.__str__())
+    #     for i in range(7, 0, -1):
+    #         today = date - datetime.timedelta(days=i)
+    #         today_pd = pd.to_datetime(today)
+    #         df = df_after_market_daily[df_after_market_daily["Date"] == today_pd]
+    #         count = 0
+    #         # print(df)
+    #         try:
+    #             lst_y_opened.append(df["Target"].tolist()[0])
+    #             lst_y_closed.append(df["Actual"].tolist()[0])
+    #         except Exception as e:
+    #             print(e)
+    #             lst_y_opened.append(0)
+    #             lst_y_closed.append(0)
+    #         lst_x.append(today.__str__())
 
-        data["Target"] = lst_y_opened
-        data["Actual"] = lst_y_closed
-        data["Date"] = lst_x
+    #     data["Target"] = lst_y_opened
+    #     data["Actual"] = lst_y_closed
+    #     data["Date"] = lst_x
 
-        # print(data["Target"].__len__())
+    #     # print(data["Target"].__len__())
 
-        fig = px.bar(
-            data,
-            x="Date",
-            y=["Target", "Actual"],
-            color_discrete_map={"Target": color.blue, "Actual": color.skyblue},
-            barmode="group",
-            text_auto=True,
-        )
-        st.plotly_chart(fig, use_container_width=True)
-    with colB:
-        lst_x = list()
-        lst_y_opened = list()
-        lst_y_closed = list()
+    #     fig = px.bar(
+    #         data,
+    #         x="Date",
+    #         y=["Target", "Actual"],
+    #         color_discrete_map={"Target": color.blue, "Actual": color.skyblue},
+    #         barmode="group",
+    #         text_auto=True,
+    #     )
+    #     st.plotly_chart(fig, use_container_width=True)
+    # with colB:
+    #     lst_x = list()
+    #     lst_y_opened = list()
+    #     lst_y_closed = list()
 
-        st.write("\n"
-                 "                                  <div class = \"heading\">\n"
-                 "                                      Weekly Trends\n"
-                 "                                  </div>\n"
-                 "                              ", unsafe_allow_html=True)
-        data = {}
-        # print(df["Opened"])
+    #     st.write("\n"
+    #              "                                  <div class = \"heading\">\n"
+    #              "                                      Weekly Trends\n"
+    #              "                                  </div>\n"
+    #              "                              ", unsafe_allow_html=True)
+    #     data = {}
+    #     # print(df["Opened"])
 
-        for i, opened in enumerate(df_after_market_weekly_filtered["Target"]):
-            if i == 0:
-                lst_x.append(f"W{i + 1}(01-07)")
-                lst_y_opened.append(opened)
-            if i == 1:
-                lst_x.append(f"W{i + 1}(08-15)")
-                lst_y_opened.append(opened)
-            if i == 2:
-                lst_x.append(f"W{i + 1}(16-23)")
-                lst_y_opened.append(opened)
-            if i == 3:
-                lst_x.append(f"W{i + 1}(24-31)")
-                lst_y_opened.append(opened)
+    #     for i, opened in enumerate(df_after_market_weekly_filtered["Target"]):
+    #         if i == 0:
+    #             lst_x.append(f"W{i + 1}(01-07)")
+    #             lst_y_opened.append(opened)
+    #         if i == 1:
+    #             lst_x.append(f"W{i + 1}(08-15)")
+    #             lst_y_opened.append(opened)
+    #         if i == 2:
+    #             lst_x.append(f"W{i + 1}(16-23)")
+    #             lst_y_opened.append(opened)
+    #         if i == 3:
+    #             lst_x.append(f"W{i + 1}(24-31)")
+    #             lst_y_opened.append(opened)
 
-        for i, closed in enumerate(df_after_market_weekly_filtered["Actual"]):
-            if i == 0:
-                lst_y_closed.append(closed)
-            if i == 1:
-                lst_y_closed.append(closed)
-            if i == 2:
-                lst_y_closed.append(closed)
-            if i == 3:
-                lst_y_closed.append(closed)
+    #     for i, closed in enumerate(df_after_market_weekly_filtered["Actual"]):
+    #         if i == 0:
+    #             lst_y_closed.append(closed)
+    #         if i == 1:
+    #             lst_y_closed.append(closed)
+    #         if i == 2:
+    #             lst_y_closed.append(closed)
+    #         if i == 3:
+    #             lst_y_closed.append(closed)
 
-        data["Weeks"] = lst_x
-        data["Target"] = lst_y_opened
-        data["Actual"] = lst_y_closed
-        # print(data)
-        fig = px.bar(
-            data,
-            x="Weeks",
-            y=["Target", "Actual"],
-            barmode="group",
-            text_auto=True,
-            color_discrete_map={"Target": color.blue, "Actual": color.skyblue},
-        )
-        st.plotly_chart(fig, use_container_width=True)
+    #     data["Weeks"] = lst_x
+    #     data["Target"] = lst_y_opened
+    #     data["Actual"] = lst_y_closed
+    #     # print(data)
+    #     fig = px.bar(
+    #         data,
+    #         x="Weeks",
+    #         y=["Target", "Actual"],
+    #         barmode="group",
+    #         text_auto=True,
+    #         color_discrete_map={"Target": color.blue, "Actual": color.skyblue},
+    #     )
+    #     st.plotly_chart(fig, use_container_width=True)
 
-    horizontal_line()
+    # horizontal_line()
     data = {}
     lst_x = list()
     lst_y_Opened = list()
@@ -561,100 +561,100 @@ with tab4:
         with card3:
             st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue};'>Monthly Actual :\n"
                         f"                            <h4>{actual}</h4></div>", unsafe_allow_html=True)
-    colA, colB = st.columns((1, 1))
-    with colA:
-        st.write("\n"
-                 "                                      <div class = \"heading\">\n"
-                 "                                          Daily Trends\n"
-                 "                                      </div>\n"
-                 "                                  ", unsafe_allow_html=True)
-        data = {}
-        lst_x = []
-        lst_y_opened = []
-        lst_y_closed = []
+    # colA, colB = st.columns((1, 1))
+    # with colA:
+    #     st.write("\n"
+    #              "                                      <div class = \"heading\">\n"
+    #              "                                          Daily Trends\n"
+    #              "                                      </div>\n"
+    #              "                                  ", unsafe_allow_html=True)
+    #     data = {}
+    #     lst_x = []
+    #     lst_y_opened = []
+    #     lst_y_closed = []
 
-        for i in range(7, 0, -1):
-            today = date - datetime.timedelta(days=i)
-            today_pd = pd.to_datetime(today)
-            df = df_export_daily[df_export_daily["Date"] == today_pd]
-            count = 0
-            # print(df)
-            try:
-                lst_y_opened.append(df["Target"].tolist()[0])
-                lst_y_closed.append(df["Actual"].tolist()[0])
-            except Exception as e:
-                print(e)
-                lst_y_opened.append(0)
-                lst_y_closed.append(0)
-            lst_x.append(today.__str__())
+    #     for i in range(7, 0, -1):
+    #         today = date - datetime.timedelta(days=i)
+    #         today_pd = pd.to_datetime(today)
+    #         df = df_export_daily[df_export_daily["Date"] == today_pd]
+    #         count = 0
+    #         # print(df)
+    #         try:
+    #             lst_y_opened.append(df["Target"].tolist()[0])
+    #             lst_y_closed.append(df["Actual"].tolist()[0])
+    #         except Exception as e:
+    #             print(e)
+    #             lst_y_opened.append(0)
+    #             lst_y_closed.append(0)
+    #         lst_x.append(today.__str__())
 
-        data["Target"] = lst_y_opened
-        data["Actual"] = lst_y_closed
-        data["Date"] = lst_x
+    #     data["Target"] = lst_y_opened
+    #     data["Actual"] = lst_y_closed
+    #     data["Date"] = lst_x
 
-        # print(data["Target"].__len__())
+    #     # print(data["Target"].__len__())
 
-        fig = px.bar(
-            data,
-            x="Date",
-            y=["Target", "Actual"],
-            color_discrete_map={"Target": color.blue, "Actual": color.skyblue},
-            barmode="group",
-            text_auto=True,
-        )
-        st.plotly_chart(fig, use_container_width=True)
-    with colB:
-        lst_x = list()
-        lst_y_opened = list()
-        lst_y_closed = list()
+    #     fig = px.bar(
+    #         data,
+    #         x="Date",
+    #         y=["Target", "Actual"],
+    #         color_discrete_map={"Target": color.blue, "Actual": color.skyblue},
+    #         barmode="group",
+    #         text_auto=True,
+    #     )
+    #     st.plotly_chart(fig, use_container_width=True)
+    # with colB:
+    #     lst_x = list()
+    #     lst_y_opened = list()
+    #     lst_y_closed = list()
 
-        st.write("\n"
-                 "                                  <div class = \"heading\">\n"
-                 "                                      Weekly Trends\n"
-                 "                                  </div>\n"
-                 "                              ", unsafe_allow_html=True)
-        data = {}
-        # print(df["Opened"])
+    #     st.write("\n"
+    #              "                                  <div class = \"heading\">\n"
+    #              "                                      Weekly Trends\n"
+    #              "                                  </div>\n"
+    #              "                              ", unsafe_allow_html=True)
+    #     data = {}
+    #     # print(df["Opened"])
 
-        for i, opened in enumerate(df_export_filtered["Target"]):
-            if i == 0:
-                lst_x.append(f"W{i + 1}(01-07)")
-                lst_y_opened.append(opened)
-            if i == 1:
-                lst_x.append(f"W{i + 1}(08-15)")
-                lst_y_opened.append(opened)
-            if i == 2:
-                lst_x.append(f"W{i + 1}(16-23)")
-                lst_y_opened.append(opened)
-            if i == 3:
-                lst_x.append(f"W{i + 1}(24-31)")
-                lst_y_opened.append(opened)
+    #     for i, opened in enumerate(df_export_filtered["Target"]):
+    #         if i == 0:
+    #             lst_x.append(f"W{i + 1}(01-07)")
+    #             lst_y_opened.append(opened)
+    #         if i == 1:
+    #             lst_x.append(f"W{i + 1}(08-15)")
+    #             lst_y_opened.append(opened)
+    #         if i == 2:
+    #             lst_x.append(f"W{i + 1}(16-23)")
+    #             lst_y_opened.append(opened)
+    #         if i == 3:
+    #             lst_x.append(f"W{i + 1}(24-31)")
+    #             lst_y_opened.append(opened)
 
-        for i, closed in enumerate(df_export_filtered["Actual"]):
-            if i == 0:
-                lst_y_closed.append(closed)
-            if i == 1:
-                lst_y_closed.append(closed)
-            if i == 2:
-                lst_y_closed.append(closed)
-            if i == 3:
-                lst_y_closed.append(closed)
+    #     for i, closed in enumerate(df_export_filtered["Actual"]):
+    #         if i == 0:
+    #             lst_y_closed.append(closed)
+    #         if i == 1:
+    #             lst_y_closed.append(closed)
+    #         if i == 2:
+    #             lst_y_closed.append(closed)
+    #         if i == 3:
+    #             lst_y_closed.append(closed)
 
-        data["Weeks"] = lst_x
-        data["Target"] = lst_y_opened
-        data["Actual"] = lst_y_closed
-        # print(data)
-        fig = px.bar(
-            data,
-            x="Weeks",
-            y=["Target", "Actual"],
-            barmode="group",
-            text_auto=True,
-            color_discrete_map={"Target": color.blue, "Actual": color.skyblue},
-        )
-        st.plotly_chart(fig, use_container_width=True)
+    #     data["Weeks"] = lst_x
+    #     data["Target"] = lst_y_opened
+    #     data["Actual"] = lst_y_closed
+    #     # print(data)
+    #     fig = px.bar(
+    #         data,
+    #         x="Weeks",
+    #         y=["Target", "Actual"],
+    #         barmode="group",
+    #         text_auto=True,
+    #         color_discrete_map={"Target": color.blue, "Actual": color.skyblue},
+    #     )
+    #     st.plotly_chart(fig, use_container_width=True)
 
-    horizontal_line()
+    # horizontal_line()
     data = {}
     lst_x = list()
     lst_y_Opened = list()

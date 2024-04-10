@@ -1,4 +1,5 @@
 import datetime
+from xml.etree.ElementInclude import include
 import streamlit as st
 import pandas as pd
 from streamlit_extras.switch_page_button import switch_page
@@ -62,6 +63,14 @@ df_plant_PPM_daily = df_plant_PPM[df_plant_PPM["Date"] == today_pd]
 # Getting Issues for Plant PPM
 df_plant_PPM_issues = pd.read_excel(xls_plant_ppm, "PPM Issue").fillna("NA")
 df_plant_PPM_issues_daily = df_plant_PPM_issues[df_plant_PPM_issues["Date"] == today_pd]
+
+# Function to remove commas from strings
+def format_value(val):
+    if isinstance(val, (int, float)):
+        return f'{val:.0f}'  # Format numerical values without commas
+    return val
+
+df_plant_PPM_issues_daily = df_plant_PPM_issues_daily.map(format_value)
 
 # Getting Supplier PPM
 df_supplier_ppm = pd.read_excel(xls_supplier_ppm, "Supplier PPM").fillna("NA")

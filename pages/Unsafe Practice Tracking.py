@@ -6,6 +6,7 @@ from methods.styles import back_btn, header, horizontal_line, selected_date
 from methods.colours import color
 import plotly.express as px
 import plotly.graph_objects as go
+import numpy as np
 
 header("Unsafe Practice Tracking")
 
@@ -56,10 +57,11 @@ else:
 #     else:
 #         df_unsafe_practices_filter_monthly = df_unsafe_practices_ytd[df_unsafe_practices_ytd["Month"] == f"{year}-{i}"][["Closure %"]].fillna(0)
 #         df_actual = df_unsafe_practices_ytd[df_unsafe_practices_ytd["Month"] == f"{year}-{i}"][["Actual"]].fillna(0)
+# print(round(df_filter_daily_closure_per['Closure %'].iloc[-1]))
 
 try:
     unsafe_practices_per_daily = round(df_filter_daily_closure_per['Closure %'].iloc[-1])
-    unsafe_practices_per_weekly = round(df_unsafe_practices_filter_weekly["Closure %"].iloc[0])
+    unsafe_practices_per_weekly = round(df_unsafe_practices_filter_weekly["Closure %"].iloc[-1])
     unsafe_practices_per_mtd = round(df_unsafe_practices_ytd["Closure %"].iloc[-1])
     unsafe_practices_per_ytd = round(df_closure_per["YTD Closure %"].iloc[-1])
 except Exception as e:
@@ -72,7 +74,7 @@ except Exception as e:
     unsafe_practices_per_mtd = 0
     # noinspection PyTypeChecker
     unsafe_practices_per_ytd = 0
-
+print(unsafe_practices_per_daily)
 # try:
 #     unsafe_practices_per_daily = int(df_filter_closure_per[["Daily Closure %"]]["Daily Closure %"].tolist()[0])
 #     unsafe_practices_per_weekly = int(df_filter_closure_per[["Weekly Closure %"]]["Weekly Closure %"].tolist()[0])

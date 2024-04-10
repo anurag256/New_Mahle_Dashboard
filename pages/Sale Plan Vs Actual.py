@@ -40,6 +40,9 @@ df_sale_vs_actual_weekly_filtered = df_sale_vs_actual_weekly[df_sale_vs_actual_w
 # Getting Monthly Data
 df_sale_vs_actual_monthly = pd.read_excel(xls_sale_vs_actual, "Monthly Data")
 
+# Getting Monthly Ordered Data
+# df_ordered_budget_monthly = pd.read_excel(xls_sale_vs_actual, '')
+
 # getting issues
 df_sale_vs_actual_issues = pd.read_excel(xls_sale_vs_actual, "Issues").fillna("NA")
 
@@ -77,14 +80,47 @@ except Exception as e:
     print(e)
     actual = "Update"
 
-card1, card2, card3, card4 = st.columns((1, 1, 1, 1))
+try:
+    monthly_order = df_sale_vs_actual_monthly[df_sale_vs_actual_monthly['Month'] == f'{year}-{current_month}']['Final OB'].tolist()[0]
+except Exception as e:
+    print(e)
+    monthly_order = "Update"
+
+try:
+    with_STO = df_sale_vs_actual_monthly[df_sale_vs_actual_monthly['Month'] == f'{year}-{current_month}']['WithSTO'].tolist()[0]
+except Exception as e:
+    print(e)
+    with_STO = "Update"
+
+try:
+    Without_STO = df_sale_vs_actual_monthly[df_sale_vs_actual_monthly['Month'] == f'{year}-{current_month}']['WithoutSTO'].tolist()[0]
+except Exception as e:
+    print(e)
+    Without_STO = "Update"
+
+
+# card1, card2, card3, card4 = st.columns((1, 1, 1, 1))
+# with card2:
+#     st.markdown(f"<div class=\"custom\" style='background-color:{color.blue}; color:{color.white}'>Monthly Budgeted Sale:\n"
+#                 f"                            <h4>{target}</h4></div>", unsafe_allow_html=True)
+# with card3:
+#     st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue};'>Monthly Actual Sale:\n"
+#                 f"                            <h4>{actual}</h4></div>", unsafe_allow_html=True)
+    
+card1, card2, card3, card4, card5, card6 = st.columns((0.5, 1, 1, 1, 1, 0.5))
 with card2:
+    st.markdown(f"<div class=\"custom\" style='background-color:{color.blue}; color:{color.white}'>Monthly Order Book:\n"
+                f"                            <h4>{monthly_order}</h4></div>", unsafe_allow_html=True)
+with card3:
+    st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue}; display: flex; flex-direction: row;'><div style='width:50%; flex:1;'>With STO: \n<h4>{with_STO}</h4></div><div style='width:50%; flex:1;'>Without STO: \n <h4>{Without_STO}</h4></div>"
+                f"                            </div>", unsafe_allow_html=True)
+with card4:
     st.markdown(f"<div class=\"custom\" style='background-color:{color.blue}; color:{color.white}'>Monthly Budgeted Sale:\n"
                 f"                            <h4>{target}</h4></div>", unsafe_allow_html=True)
-with card3:
+with card5:
     st.markdown(f"<div class=\"custom\" style='background-color:{color.skyblue};'>Monthly Actual Sale:\n"
                 f"                            <h4>{actual}</h4></div>", unsafe_allow_html=True)
-    
+
 st.write("")
 colA, colB = st.columns((1, 1))
 with colA:
